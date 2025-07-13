@@ -3,6 +3,7 @@ package com.rvakazov.todoapp.dto;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class TaskDTO {
     private String title;
@@ -10,6 +11,7 @@ public class TaskDTO {
     private LocalDateTime dateAdded;
     private String status;
     private List<String> comments;
+    private String id;
 
     public TaskDTO(String title, String description, LocalDateTime dateAdded, String status) {
         this.title = title;
@@ -17,6 +19,7 @@ public class TaskDTO {
         this.dateAdded = dateAdded;
         this.status = status;
         this.comments = new ArrayList<>();
+        this.id = UUID.randomUUID().toString();
     }
 
     public void setTitle(String title) {
@@ -33,10 +36,6 @@ public class TaskDTO {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public void setComment(String comment) {
-        this.comments.add(comment);
     }
 
     public String getTitle() {
@@ -57,5 +56,21 @@ public class TaskDTO {
 
     public List<String> getComments() {
         return comments;
+    }
+
+    public void setComment(String comment) {
+        this.comments.add(comment);
+    }
+
+    public void setComments(List<String> comments) {
+        this.comments = comments;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

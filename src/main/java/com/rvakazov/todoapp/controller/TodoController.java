@@ -14,6 +14,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class TodoController {
     @FXML
@@ -51,6 +52,10 @@ public class TodoController {
             dialogStage.setTitle("Add new task");
             dialogStage.initModality(Modality.APPLICATION_MODAL);
             Scene scene = new Scene(dialogPane);
+            // adding custom css to specific stage
+            String css = Objects.requireNonNull(this.getClass().getResource("/com/rvakazov/todoapp/addTaskStyles.css")).toExternalForm();
+            scene.getStylesheets().add(css);
+            
             dialogStage.setScene(scene);
             dialogStage.showAndWait();
         } catch (Exception e) {

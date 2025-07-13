@@ -38,7 +38,6 @@ public class TodoController {
 
     @FXML
     public void handleAddTask(ActionEvent actionEvent) {
-//        addTask("New task", "A new task description", LocalDateTime.now(), "ToDo");
         showAddTaskDialog();
     }
 
@@ -55,13 +54,12 @@ public class TodoController {
             // adding custom css to specific stage
             String css = Objects.requireNonNull(this.getClass().getResource("/com/rvakazov/todoapp/addTaskStyles.css")).toExternalForm();
             scene.getStylesheets().add(css);
-            
+
             dialogStage.setScene(scene);
             dialogStage.showAndWait();
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     public void addTaskFromDialog(String title, String description) {
@@ -79,7 +77,7 @@ public class TodoController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/rvakazov/todoapp/task-card.fxml"));
             HBox taskCard = loader.load();
             TaskCardController controller = loader.getController();
-            controller.setTaskDetails(task.getTitle(), task.getDateAdded(), task.getStatus());
+            controller.setTaskDetails(task);
 
             taskListVBox.getChildren().add(taskCard);
         } catch (Exception e) {

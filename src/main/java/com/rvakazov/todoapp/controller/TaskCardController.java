@@ -1,5 +1,6 @@
 package com.rvakazov.todoapp.controller;
 
+import com.rvakazov.todoapp.dto.TaskDTO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -8,7 +9,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
@@ -17,20 +17,26 @@ public class TaskCardController {
     public Label taskTimeStamp;
     public Label taskStatus;
 
+    private TaskDTO task;
+
     public void handleViewTask(ActionEvent actionEvent) {
         System.out.println("Viewing task: " + taskName.getText());
+        showViewTaskDialog(task);
+    }
+
+    private void showViewTaskDialog(TaskDTO task) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/rvakazov/todoapp/task_view_dialog.fxml"));
             VBox dialogPane = loader.load();
             TaskViewDialogController dialogController = loader.getController();
+            dialogController.setTaskDetails(task, this);
             Stage dialogStage = new Stage();
             dialogStage.setTitle(taskName.getText());
             dialogStage.initModality(Modality.APPLICATION_MODAL);
             Scene scene = new Scene(dialogPane);
-
             // adding custom css to specific stage
-//            String css = Objects.requireNonNull(this.getClass().getResource("/com/rvakazov/todoapp/addTaskStyles.css")).toExternalForm();
-//            scene.getStylesheets().add(css);
+            String css = Objects.requireNonNull(this.getClass().getResource("/com/rvakazov/todoapp/viewDialogStyles.css")).toExternalForm();
+            scene.getStylesheets().add(css);
 
             dialogStage.setScene(scene);
             dialogStage.showAndWait();
@@ -39,12 +45,13 @@ public class TaskCardController {
         }
     }
 
-    public void setTaskDetails(String name, LocalDateTime timestamp, String status) {
-        taskName.setText(name);
+    public void setTaskDetails(TaskDTO task) {
+        this.task = task;
+        taskName.setText(task.getTitle());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a, dd.MM.yyyy");
-        taskTimeStamp.setText(timestamp.format(formatter));
-        taskStatus.setText(status);
-        applyStatusColor(status);
+        taskTimeStamp.setText(task.getDateAdded().format(formatter));
+        taskStatus.setText(task.getStatus());
+        applyStatusColor(task.getStatus());
     }
 
     private void applyStatusColor(String status) {

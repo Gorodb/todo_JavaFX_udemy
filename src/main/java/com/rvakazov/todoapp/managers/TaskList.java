@@ -24,4 +24,13 @@ public class TaskList {
     public void removeTask(TaskDTO task) {
         tasks.remove(task);
     }
+
+    public TaskDTO getTaskById(String id) {
+        for (TaskDTO currentTask: tasks) {
+             if (currentTask.getId().equals(id)) {
+                return currentTask;
+             }
+        }
+        return null;
+    }
 }

@@ -58,7 +58,7 @@ public class TaskDTO {
         return comments;
     }
 
-    public void setComment(String comment) {
+    public void addComment(String comment) {
         this.comments.add(comment);
     }
 

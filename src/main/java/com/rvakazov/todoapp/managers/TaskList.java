@@ -7,11 +7,7 @@ import java.util.List;
 
 public class TaskList {
 
-    private List<TaskDTO> tasks;
-
-    public TaskList() {
-        tasks = new ArrayList<>();
-    }
+    private static final List<TaskDTO> tasks = new ArrayList<>();
 
     public List<TaskDTO> getTasks() {
         return tasks;

@@ -59,6 +59,10 @@ public class TodoController {
 
     }
 
+    public void addTaskFromDialog(String title, String description) {
+        addTask(title, description, LocalDateTime.now(), "ToDo");
+    }
+
     private void addTask(String title, String description, LocalDateTime dateAdded, String status) {
         TaskDTO newTask = new TaskDTO(title, description, dateAdded, status);
         taskList.addTask(newTask);

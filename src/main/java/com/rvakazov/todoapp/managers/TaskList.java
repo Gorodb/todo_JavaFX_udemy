@@ -33,4 +33,17 @@ public class TaskList {
         }
         return null;
     }
+
+    public void updateTask(TaskDTO updatedTask) {
+        for (int i = 0; i < tasks.size(); i++) {
+            TaskDTO currentTask = tasks.get(i);
+            if (currentTask.getId().equals(updatedTask.getId())) {
+                currentTask.setTitle(updatedTask.getTitle());
+                currentTask.setDescription(updatedTask.getDescription());
+                currentTask.setStatus(updatedTask.getStatus());
+                currentTask.setComments(updatedTask.getComments());
+                break;
+            }
+        }
+    }
 }

@@ -1,6 +1,7 @@
 package com.rvakazov.todoapp.controller;
 
 import com.rvakazov.todoapp.dto.TaskDTO;
+import com.rvakazov.todoapp.managers.TaskList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -17,6 +18,7 @@ public class TaskCardController {
     public Label taskTimeStamp;
     public Label taskStatus;
 
+    private final TaskList taskList = new TaskList();
     private TaskDTO task;
 
     public void handleViewTask(ActionEvent actionEvent) {
@@ -28,6 +30,8 @@ public class TaskCardController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/rvakazov/todoapp/task_view_dialog.fxml"));
             VBox dialogPane = loader.load();
+            TaskDTO taskFromList = taskList.getTaskById(task.getId());
+            System.out.println(taskList.getTasks().size());
             TaskViewDialogController dialogController = loader.getController();
             dialogController.setTaskDetails(task, this);
             Stage dialogStage = new Stage();

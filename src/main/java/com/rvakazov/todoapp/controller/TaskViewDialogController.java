@@ -54,6 +54,10 @@ public class TaskViewDialogController {
     }
 
     public void handleUpdate(ActionEvent actionEvent) {
+        task.setTitle(taskTitleField.getText());
+        task.setDescription(taskDescriptionField.getText());
+        task.setStatus((String) statusComboBox.getValue());
+//        mainController.updateTask(task);
     }
 
     private void closeDialog() {

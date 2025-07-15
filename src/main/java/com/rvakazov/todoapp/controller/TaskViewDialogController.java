@@ -1,6 +1,7 @@
 package com.rvakazov.todoapp.controller;
 
 import com.rvakazov.todoapp.dto.TaskDTO;
+import com.rvakazov.todoapp.managers.TaskList;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.application.Platform;
@@ -57,7 +58,8 @@ public class TaskViewDialogController {
         task.setTitle(taskTitleField.getText());
         task.setDescription(taskDescriptionField.getText());
         task.setStatus((String) statusComboBox.getValue());
-//        mainController.updateTask(task);
+        mainController.updateTask(task);
+        closeDialog();
     }
 
     private void closeDialog() {

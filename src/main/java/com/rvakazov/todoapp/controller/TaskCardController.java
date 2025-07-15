@@ -58,6 +58,13 @@ public class TaskCardController {
         applyStatusColor(task.getStatus());
     }
 
+    public void updateTask(TaskDTO task) {
+        taskList.updateTask(task);
+        taskName.setText(task.getTitle());
+        taskStatus.setText(task.getStatus());
+        applyStatusColor(task.getStatus());
+    }
+
     private void applyStatusColor(String status) {
         switch (status) {
             case "ToDo":

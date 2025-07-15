@@ -3,6 +3,7 @@ package com.rvakazov.todoapp.managers;
 import com.rvakazov.todoapp.dto.TaskDTO;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class TaskList {
@@ -15,6 +16,7 @@ public class TaskList {
 
     public void addTask(TaskDTO task) {
         tasks.add(task);
+        sortTasksByStatus();
     }
 
     public void removeTask(TaskDTO task) {
@@ -41,5 +43,15 @@ public class TaskList {
                 break;
             }
         }
+        sortTasksByStatus();
+    }
+
+    private void sortTasksByStatus() {
+        tasks.sort(Comparator.comparingInt(task -> switch (task.getStatus()) {
+            case "ToDo" -> 1;
+            case "InProgress" -> 2;
+            case "Done" -> 3;
+            default -> 4;
+        }));
     }
 }

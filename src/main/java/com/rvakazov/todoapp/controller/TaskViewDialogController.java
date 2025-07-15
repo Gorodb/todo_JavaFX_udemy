@@ -1,7 +1,6 @@
 package com.rvakazov.todoapp.controller;
 
 import com.rvakazov.todoapp.dto.TaskDTO;
-import com.rvakazov.todoapp.managers.TaskList;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.application.Platform;

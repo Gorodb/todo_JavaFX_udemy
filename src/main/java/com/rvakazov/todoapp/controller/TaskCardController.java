@@ -17,9 +17,9 @@ public class TaskCardController {
     public Label taskName;
     public Label taskTimeStamp;
     public Label taskStatus;
-
     private final TaskList taskList = new TaskList();
     private TaskDTO task;
+    private TodoController mainController;
 
     public void handleViewTask(ActionEvent actionEvent) {
         System.out.println("Viewing task: " + taskName.getText());
@@ -30,8 +30,6 @@ public class TaskCardController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/rvakazov/todoapp/task_view_dialog.fxml"));
             VBox dialogPane = loader.load();
-            TaskDTO taskFromList = taskList.getTaskById(task.getId());
-            System.out.println(taskList.getTasks().size());
             TaskViewDialogController dialogController = loader.getController();
             dialogController.setTaskDetails(task, this);
             Stage dialogStage = new Stage();
@@ -49,8 +47,9 @@ public class TaskCardController {
         }
     }
 
-    public void setTaskDetails(TaskDTO task) {
+    public void setTaskDetails(TaskDTO task, TodoController mainController) {
         this.task = task;
+        this.mainController = mainController;
         taskName.setText(task.getTitle());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a, dd.MM.yyyy");
         taskTimeStamp.setText(task.getDateAdded().format(formatter));
@@ -63,6 +62,7 @@ public class TaskCardController {
         taskName.setText(task.getTitle());
         taskStatus.setText(task.getStatus());
         applyStatusColor(task.getStatus());
+        mainController.redrawTaskList();
     }
 
     private void applyStatusColor(String status) {

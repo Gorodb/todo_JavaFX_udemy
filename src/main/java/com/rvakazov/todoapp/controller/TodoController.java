@@ -69,7 +69,8 @@ public class TodoController {
     private void addTask(String title, String description, LocalDateTime dateAdded, String status) {
         TaskDTO newTask = new TaskDTO(title, description, dateAdded, status);
         taskList.addTask(newTask);
-        displayTask(newTask);
+        redrawTaskList();
+//        displayTask(newTask);
     }
 
     private void displayTask(TaskDTO task) {
@@ -77,11 +78,18 @@ public class TodoController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/rvakazov/todoapp/task-card.fxml"));
             HBox taskCard = loader.load();
             TaskCardController controller = loader.getController();
-            controller.setTaskDetails(task);
+            controller.setTaskDetails(task, this);
 
             taskListVBox.getChildren().add(taskCard);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public void redrawTaskList() {
+        taskListVBox.getChildren().clear();
+        for(TaskDTO task: taskList.getTasks()) {
+            displayTask(task);
         }
     }
 }

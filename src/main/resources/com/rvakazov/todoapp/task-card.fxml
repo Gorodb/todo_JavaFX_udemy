@@ -10,7 +10,7 @@
 <HBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.rvakazov.todoapp.controller.TaskCardController"
-      prefHeight="400.0" prefWidth="600.0" alignment="CENTER" styleClass="task-card">
+      prefHeight="80.0" prefWidth="600.0" alignment="CENTER" styleClass="task-card">
     <VBox spacing="5" HBox.hgrow="ALWAYS" >
         <Label fx:id="taskName" text="Task name" />
         <Label fx:id="taskTimeStamp" text="Timestamp" styleClass="timestamp" />

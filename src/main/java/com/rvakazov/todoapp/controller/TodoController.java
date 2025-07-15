@@ -4,6 +4,8 @@ import com.rvakazov.todoapp.dto.TaskDTO;
 import com.rvakazov.todoapp.managers.TaskList;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +16,9 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class TodoController {
     @FXML
@@ -30,6 +34,12 @@ public class TodoController {
         taskList = new TaskList();
         statusComboBox.getItems().addAll("All", "ToDo", "InProgress", "Done");
         statusComboBox.setValue("All");
+        statusComboBox.valueProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
+                filterTaskByStatus(newValue);
+            }
+        });
 
         addTask("Create a javaFX Project", "First task description", LocalDateTime.now().minusMinutes(4), "InProgress");
         addTask("Create a SpringBoot Project", "A new task description", LocalDateTime.now().minusMinutes(3), "ToDo");
@@ -39,6 +49,23 @@ public class TodoController {
     @FXML
     public void handleAddTask(ActionEvent actionEvent) {
         showAddTaskDialog();
+    }
+
+    private void filterTaskByStatus(String status) {
+        taskListVBox.getChildren().clear();
+        List<TaskDTO> filteredTasks;
+
+        if ("All".equals(status)) {
+            filteredTasks = taskList.getTasks();
+        } else {
+            filteredTasks = taskList.getTasks().stream().filter(
+                    task -> task.getStatus().equals(status)).collect(Collectors.toList()
+            );
+        }
+
+        for(TaskDTO task: filteredTasks) {
+            displayTask(task);
+        }
     }
 
     private void showAddTaskDialog() {
@@ -91,5 +118,6 @@ public class TodoController {
         for(TaskDTO task: taskList.getTasks()) {
             displayTask(task);
         }
+        statusComboBox.setValue("All");
     }
 }

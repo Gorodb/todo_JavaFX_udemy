@@ -41,9 +41,10 @@ public class TodoController {
             }
         });
 
-        addTask("Create a javaFX Project", "First task description", LocalDateTime.now().minusMinutes(4), "InProgress");
-        addTask("Create a SpringBoot Project", "A new task description", LocalDateTime.now().minusMinutes(3), "ToDo");
-        addTask("Learn React", "A new task description", LocalDateTime.now().minusMinutes(15), "Done");
+        redrawTaskList();
+//        addTask("Create a javaFX Project", "First task description", LocalDateTime.now().minusMinutes(4), "InProgress");
+//        addTask("Create a SpringBoot Project", "A new task description", LocalDateTime.now().minusMinutes(3), "ToDo");
+//        addTask("Learn React", "A new task description", LocalDateTime.now().minusMinutes(15), "Done");
     }
 
     @FXML

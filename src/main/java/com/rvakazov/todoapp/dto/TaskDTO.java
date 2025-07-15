@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 public class TaskDTO implements Serializable {
@@ -26,6 +27,13 @@ public class TaskDTO implements Serializable {
         this.status = status;
         this.comments = new ArrayList<>();
         this.id = UUID.randomUUID().toString();
+    }
+
+    @Override
+    public boolean equals(Object taskObj) {
+        if (this == taskObj) return true;
+        if (!(taskObj instanceof TaskDTO task)) return false;
+        return Objects.equals(id, task.id);
     }
 
     public void setTitle(String title) {

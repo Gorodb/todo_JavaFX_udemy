@@ -34,6 +34,7 @@
     <HBox spacing="20" alignment="CENTER_RIGHT">
         <Region HBox.hgrow="ALWAYS" />
         <MFXButton text="Cancel" onAction="#handleCancel" styleClass="cancel-button" prefWidth="80" prefHeight="30"/>
+        <MFXButton text="Delete" onAction="#handleDelete" styleClass="delete-button" prefWidth="80" prefHeight="30"/>
         <MFXButton text="Update" onAction="#handleUpdate" styleClass="update-button" prefWidth="80" prefHeight="30"/>
     </HBox>
 </VBox>

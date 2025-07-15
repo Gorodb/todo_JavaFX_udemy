@@ -30,6 +30,7 @@ public class TaskList implements Serializable {
 
     public void removeTask(TaskDTO task) {
         tasks.remove(task);
+        saveTasks();
     }
 
     public TaskDTO getTaskById(String id) {

@@ -81,4 +81,9 @@ public class TaskCardController {
                 break;
         }
     }
+
+    public void deleteTask(TaskDTO task) {
+        taskList.removeTask(task);
+        mainController.redrawTaskList();
+    }
 }

@@ -66,4 +66,9 @@ public class TaskViewDialogController {
         Stage stage = (Stage) taskTitleField.getScene().getWindow();
         stage.close();
     }
+
+    public void handleDelete(ActionEvent actionEvent) {
+        mainController.deleteTask(task);
+        closeDialog();
+    }
 }
